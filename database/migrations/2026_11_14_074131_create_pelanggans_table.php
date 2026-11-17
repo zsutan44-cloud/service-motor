@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-public function up(): void
-{
-    Schema::table('pelanggans', function (Blueprint $table) {
-        $table->string('pekerjaan')->after('alamat');
-    });
-}
+    public function up(): void
+    {
+        Schema::create('pelanggans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_pelanggan');
+            $table->text('alamat');
+            $table->string('pekerjaan');
+            $table->string('no_hp', 15);
+            $table->timestamps();
+        });
+    }
 
-public function down(): void
-{
-    Schema::table('pelanggans', function (Blueprint $table) {
-        $table->dropColumn('pekerjaan');
-    });
-}
+    public function down(): void
+    {
+        Schema::dropIfExists('pelanggans');
+    }
 };
